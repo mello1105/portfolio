@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Dog | Matheus Melo">
+	<main class="w-screen h-screen flex items-center justify-center bg-black overflow-hidden">
+		<!-- 
+            Easter Egg: Giant Low-Res Dog
+            rendering-pixelated ensures it looks "bad" (pixelated) when scaled up, which is the requested effect.
+        -->
+		<img 
+			src="/portfolio/dog.png" 
+			alt="Dog Easter Egg" 
+			class="w-[150vw] h-[150vw] max-w-none object-cover image-pixelated animate-spin-slow"
+		/>
+	</main>
+</Layout>
+
+<style>
+	.image-pixelated {
+		image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+	}
+
+    @keyframes spin-slow {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .animate-spin-slow {
+        animation: spin-slow 20s linear infinite;
+    }
+</style>

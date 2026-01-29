@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout title="Sobre - Matheus Melo | Portfolio">
+	<Header />
+	
+	<main class="overflow-hidden bg-background min-h-screen pt-32">
+			<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start">
+				<!-- Image Column -->
+				<div class="relative animate-fade-in-up">
+					<div class="aspect-square w-full max-w-md mx-auto md:mr-auto bg-gray-200 overflow-hidden">
+						<!-- Placeholder Image - User needs to connect this to real data or replace src -->
+						<img 
+							src="/portfolio/melinho.jpeg" 
+							alt="Matheus Melo" 
+							class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+						/>
+					</div>
+				</div>
+
+				<!-- Text Column -->
+				<div class="font-sans font-light text-base md:text-lg text-gray-600 leading-relaxed space-y-6 animate-fade-in-up delay-200">
+					<p>
+						Olá, eu sou Matheus Melo. Sou um Designer Digital e Diretor de Arte apaixonado por criar experiências visuais que contam histórias e conectam marcas às pessoas.
+					</p>
+					<p>
+						Com um olhar atento aos detalhes e uma abordagem centrada no usuário, busco sempre a excelência em cada projeto, combinando estética e funcionalidade.
+					</p>
+                    <p>
+                        Acredito que o design tem o poder de transformar ideias em realidade e estou sempre em busca de novos desafios para expandir meus horizontes criativos.
+                    </p>
+				</div>
+			</div>
+	</main>
+</Layout>
+
+<style>
+	.animate-fade-in-up {
+		animation: fadeInUp 0.8s ease-out forwards;
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	
+	.delay-200 {
+		animation-delay: 200ms;
+	}
+
+	@keyframes fadeInUp {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>

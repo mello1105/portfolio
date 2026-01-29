@@ -1,0 +1,50 @@
+---
+import { urlFor } from "../lib/sanity";
+
+interface Props {
+  projects: any[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 px-6 md:px-12 pb-20">
+  {projects.map((project, index) => {
+    // Logic: 2 Vertical items (index 0, 1) -> 1 Horizontal item (index 2) -> Repeat
+    // Every 3rd item (index 2, 5, 8...) is full width
+    const isFullWidth = (index + 1) % 3 === 0;
+    
+    return (
+      <article class={`group cursor-pointer relative ${isFullWidth ? 'md:col-span-2' : 'md:col-span-1'}`}>
+        <a href={`/portfolio/project/${project.slug?.current}`} class="block h-full">
+            <div class={`relative overflow-hidden w-full bg-gray-100 ${isFullWidth ? 'h-[50vh] md:h-[65vh]' : 'h-[60vh] md:h-[80vh]'}`}>
+                {project.image && (
+                <img 
+                    src={urlFor(project.image).width(isFullWidth ? 1600 : 800).url()} 
+                    alt={project.title}
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                )}
+                
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-start justify-start p-6 md:p-10 text-left">
+                    <div>
+                        <h3 class="text-white font-heading text-xl md:text-3xl font-bold mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            {project.title}
+                        </h3>
+                        {project.date && (
+                            <p class="text-white/80 font-sans text-xs tracking-widest uppercase translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                                {new Date(project.date).getFullYear()}
+                            </p>
+                        )}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 md:hidden">
+                <h3 class="font-heading text-xl font-bold">{project.title}</h3>
+            </div>
+        </a>
+      </article>
+    );
+  })}
+</div>

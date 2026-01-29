@@ -1,16 +1,84 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import { client } from '../lib/sanity';
+
+const projects = await client.fetch(`*[_type == "project"] | order(date desc) {
+  title,
+  slug,
+  date,
+  image,
+  description,
+  link
+}`);
+
 
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Matheus Melo | Portfolio">
+	<Header />
+	
+	<main class="overflow-hidden">
+
+
+		<!-- Experience Section -->
+
+
+		<!-- Selected Works Section -->
+		<section id="work" class="pt-32 pb-20 bg-background">
+			<div class="opacity-0 translate-y-8 animate-on-scroll delay-300">
+				<ProjectGrid projects={projects} />
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section id="contact" class="py-32 px-6 md:px-12 bg-black text-white min-h-[70vh] flex items-center justify-center relative">
+			<div class="max-w-4xl mx-auto text-center">
+				<h2 class="font-heading text-3xl md:text-5xl font-bold mb-12 opacity-0 translate-y-8 animate-on-scroll">
+					matheusmelomr@gmail.com
+				</h2>
+			</div>
+            <div class="absolute bottom-6 right-6 md:bottom-12 md:right-12 flex gap-4 opacity-0 translate-y-8 animate-on-scroll delay-500">
+                <a href="https://www.linkedin.com/in/matheus-melo-89479b286/" target="_blank" rel="noopener noreferrer" class="p-3 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300 group" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/553195516556" target="_blank" rel="noopener noreferrer" class="p-3 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all duration-300 group" aria-label="WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle">
+                        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+                    </svg>
+                </a>
+            </div>
+		</section>
+	</main>
+</Layout>
+
+<script>
+	// Scroll Animation Observer
+	const observerOptions = {
+		root: null,
+		rootMargin: '0px',
+		threshold: 0.1
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.remove('opacity-0', 'translate-y-8', 'scale-95');
+				entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+				// Optional: Stop observing once animated
+				// observer.unobserve(entry.target);
+			}
+		});
+	}, observerOptions);
+
+	document.addEventListener('DOMContentLoaded', () => {
+		const hiddenElements = document.querySelectorAll('.animate-on-scroll');
+		hiddenElements.forEach((el) => {
+			el.classList.add('transition-all', 'duration-1000', 'ease-out');
+			observer.observe(el);
+		});
+	});
+</script>

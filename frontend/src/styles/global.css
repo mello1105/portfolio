@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #292A2C;
+  --color-background: #fafafa;
+  
+  --font-sans: 'Outfit', sans-serif;
+  --font-heading: 'Syne', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+}

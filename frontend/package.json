@@ -9,6 +9,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.9"
+    "@astrojs/check": "^0.9.6",
+    "@sanity/client": "^7.14.0",
+    "@sanity/image-url": "^2.0.3",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.9",
+    "tailwindcss": "^4.1.18",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.9.3"
   }
 }
