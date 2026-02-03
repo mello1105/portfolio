@@ -4,8 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#292A2C',
-        background: '#FFFFFF',
+        primary: '#0c1821',
+        background: '#d3c7ad',
+        secondary: '#754437',
+        accent: '#754437',
+        muted: '#6b6751',
       },
       fontFamily: {
         sans: ['Outfit', 'sans-serif'],

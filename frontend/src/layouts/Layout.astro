@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
 	title: string;
@@ -14,14 +14,57 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content="Portfolio" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+		<link rel="icon" type="image/png" href="/portfolio/origami.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="bg-background text-primary font-sans antialiased selection:bg-black selection:text-white">
+	<body
+		class="bg-background text-primary font-sans antialiased selection:bg-black selection:text-white"
+	>
 		<slot />
 	</body>
 </html>
+
+<script>
+	// Scroll Animation Observer
+	const observerOptions = {
+		root: null,
+		rootMargin: "0px",
+		threshold: 0.1,
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.remove(
+					"opacity-0",
+					"translate-y-8",
+					"scale-95",
+				);
+				entry.target.classList.add(
+					"opacity-100",
+					"translate-y-0",
+					"scale-100",
+				);
+				// Optional: Stop observing once animated
+				// observer.unobserve(entry.target);
+			}
+		});
+	}, observerOptions);
+
+	document.addEventListener("DOMContentLoaded", () => {
+		const hiddenElements = document.querySelectorAll(".animate-on-scroll");
+		hiddenElements.forEach((el) => {
+			el.classList.add("transition-all", "duration-1000", "ease-out");
+			observer.observe(el);
+		});
+	});
+
+	// Re-run on View Transitions or content updates if needed, though simple DOMContentLoaded works for static/MPA
+</script>
