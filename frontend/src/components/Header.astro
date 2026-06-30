@@ -2,9 +2,13 @@
     <a
         href="/portfolio"
         id="logo-link"
-        class="text-xl font-heading font-normal tracking-wide pointer-events-auto text-primary z-[101] relative transition-colors duration-300"
+        class="pointer-events-auto z-[101] relative transition-all duration-300"
     >
-        Matheus Melo
+        <img
+            src="/portfolio/Logo.png"
+            alt="Matheus Melo"
+            class="h-12 md:h-14 w-auto"
+        />
     </a>
 
     <button
@@ -71,6 +75,7 @@
                 menuToggle.classList.add("text-primary");
                 logoLink.classList.remove("text-background");
                 logoLink.classList.add("text-primary");
+                logoLink.classList.remove("invert");
 
                 // Allow scrolling again
                 document.body.style.overflow = "";
@@ -85,6 +90,7 @@
                 menuToggle.classList.add("text-background");
                 logoLink.classList.remove("text-primary");
                 logoLink.classList.add("text-background");
+                logoLink.classList.add("invert");
 
                 // Prevent scrolling when menu is open
                 document.body.style.overflow = "hidden";
